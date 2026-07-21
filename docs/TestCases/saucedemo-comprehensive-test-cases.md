@@ -158,6 +158,32 @@ TC-R-02: Price Consistency
 10. Exploratory Ideas
 - Try bookmarking pages, deep-linking product pages, manipulating network (slow 3G), and verify sensible behavior.
 
+11. Login Test Cases
+
+| Test Case ID | Test Scenario | Test Steps | Test Data | Expected Result |
+|---|---|---|---|---|
+| TC_LOGIN_001 | Verify login with valid credentials | Enter valid username and password, click Login | Valid username & password | User is logged in and redirected to the home page. |
+| TC_LOGIN_002 | Verify login with invalid password | Enter valid username and invalid password, click Login | Valid username, invalid password | Error message is displayed and login fails. |
+| TC_LOGIN_003 | Verify login with invalid username | Enter invalid username and valid password | Invalid username, valid password | Error message is displayed. |
+| TC_LOGIN_004 | Verify login with both invalid credentials | Enter invalid username and password | Invalid username & password | Login should fail with an appropriate error message. |
+| TC_LOGIN_005 | Verify login with empty username | Leave username blank and enter password | Blank username | Validation message should be displayed. |
+| TC_LOGIN_006 | Verify login with empty password | Enter username and leave password blank | Blank password | Validation message should be displayed. |
+| TC_LOGIN_007 | Verify login with both fields empty | Leave both fields blank and click Login | Blank username & password | Required field validation should appear. |
+| TC_LOGIN_008 | Verify password masking | Type a password | Password | Password should be hidden using dots/asterisks. |
+| TC_LOGIN_009 | Verify "Remember Me" functionality | Select Remember Me, log in, reopen browser | Valid credentials | Username/session should be remembered as per requirement. |
+| TC_LOGIN_010 | Verify "Forgot Password" link | Click Forgot Password | N/A | User should be redirected to the password reset page. |
+| TC_LOGIN_011 | Verify login using Enter key | Enter credentials and press Enter | Valid credentials | User should be logged in successfully. |
+| TC_LOGIN_012 | Verify maximum username length | Enter username exceeding the allowed length | Long username | Appropriate validation should be displayed. |
+| TC_LOGIN_013 | Verify maximum password length | Enter password exceeding the allowed length | Long password | Validation should be handled correctly. |
+| TC_LOGIN_014 | Verify SQL Injection prevention | Enter SQL injection strings | `' OR '1'='1` | Login should fail and the application should remain secure. |
+| TC_LOGIN_015 | Verify XSS prevention | Enter script tags in username/password | `<script>alert(1)</script>` | Script should not execute; input should be sanitized. |
+| TC_LOGIN_016 | Verify Trim functionality | Enter credentials with leading/trailing spaces | `" user "` | Spaces should be handled according to the application's requirements. |
+| TC_LOGIN_017 | Verify Logout and re-login | Log in, log out, then log in again | Valid credentials | User should be able to log in again successfully. |
+| TC_LOGIN_018 | Verify session timeout | Log in and remain idle until the session expires | Valid credentials | User should be logged out and prompted to log in again. |
+| TC_LOGIN_019 | Verify account lock after multiple failed attempts | Enter incorrect password multiple times | Invalid password | Account should be locked or CAPTCHA shown as per security policy. |
+| TC_LOGIN_020 | Verify Login button state | Observe Login button with empty fields | N/A | Button should be enabled/disabled according to the application's design. |
+| TC_LOGIN_021 | Verify password visibility toggle | Enter a password and use the show/hide password control | Password | Password is toggled between hidden and visible states according to UI controls. |
+
 Execution Notes
 - For each failed test capture: browser, OS, URL, steps, expected vs actual, screenshot, console logs.
 - When automating, add these to CI as separate tests and attach HTML report and videos for failures.

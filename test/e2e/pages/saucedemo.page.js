@@ -9,6 +9,10 @@ class SauceDemoPage extends BasePage {
     this.password = locators.password;
     this.loginButton = locators.loginButton;
     this.errorSelector = locators.errorSelector;
+    this.rememberMe = locators.rememberMe;
+    this.forgotPassword = locators.forgotPassword;
+    this.burgerMenu = locators.burgerMenu;
+    this.logoutLink = locators.logoutLink;
     this.cartLink = locators.cartLink;
     this.checkoutButton = locators.checkoutButton;
     this.firstName = locators.firstName;
@@ -28,6 +32,43 @@ class SauceDemoPage extends BasePage {
     await this.page.fill(this.username, user);
     await this.page.fill(this.password, pass);
     await this.page.click(this.loginButton);
+  }
+
+  async loginWithEnter(user, pass) {
+    await this.page.fill(this.username, user);
+    await this.page.fill(this.password, pass);
+    await this.page.press(this.password, 'Enter');
+  }
+
+  async clickRememberMe() {
+    const checkbox = this.page.locator(this.rememberMe);
+    if (await checkbox.count() > 0) {
+      await checkbox.check().catch(() => null);
+    }
+  }
+
+  async clickForgotPassword() {
+    if (this.forgotPassword) {
+      await this.page.click(this.forgotPassword).catch(() => null);
+    }
+  }
+
+  async isPasswordMasked() {
+    const type = await this.page.getAttribute(this.password, 'type');
+    return type === 'password';
+  }
+
+  async isLoginButtonDisabled() {
+    return await this.page.isDisabled(this.loginButton);
+  }
+
+  async getLoginError() {
+    return await this.page.locator(this.errorSelector).textContent().catch(() => '');
+  }
+
+  async logout() {
+    await this.page.click(this.burgerMenu).catch(() => null);
+    await this.page.click(this.logoutLink).catch(() => null);
   }
 
   async getError() {

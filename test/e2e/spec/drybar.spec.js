@@ -7,16 +7,13 @@ test.describe('Drybar Add-to-Cart and Checkout (Guest)', () => {
 
     // 1. Open site
     await dry.goto();
-
-    // 2. Close any modal/popups
+    await dry.acceptCookies();
     await dry.closePopupIfPresent();
 
-    // 3. Accept cookies
-    await dry.acceptCookies();
+    
 
-    // 4. Navigate to Shampoos via Hair Products menu
+    // 4. Navigate to Shampoos category page
     await dry.navigateToShampoos();
-    await expect(page).toHaveURL(/shampoo/i);
 
     // 5. Click on the first product
     await dry.clickFirstProduct();

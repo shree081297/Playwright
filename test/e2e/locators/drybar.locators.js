@@ -1,6 +1,6 @@
 module.exports = {
-  url: 'https://www.drybar.com/website',
-  cookieAccept: '#onetrust-accept-btn-handler',
+  url: 'https://www.drybar.com/',
+  cookieAccept: '#onetrust-accept-btn-handler, button#truste-consent-button, button.truste-accpt-btn, button.truste-button',
   popupCloseSelectors: [
     '.newsletter-modal button.close',
     '.ui-dialog-titlebar-close',

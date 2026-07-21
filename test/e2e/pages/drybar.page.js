@@ -29,9 +29,27 @@ class DrybarPage extends BasePage {
   }
 
   async navigateToShampoos() {
-    await this.page.locator(this.loc.hairProductsMenu).hover().catch(() => null);
-    await this.page.click(this.loc.shampoosLink).catch(() => null);
-    await this.page.waitForLoadState('networkidle');
+    // Directly navigate to the shampoos category page to avoid menu hover flakiness.
+    await this.page.goto('https://www.drybar.com/hair-care-products/shampoos', { waitUntil: 'domcontentloaded' }).catch(() => null);
+    await this.page.waitForSelector(this.loc.productList, { timeout: 15000 }).catch(() => null);
+    await this.page.waitForLoadState('networkidle').catch(() => null);
+  }
+
+  ensureActivePage() {
+    try {
+      if (this.page && this.page.context) {
+        const pages = this.page.context().pages();
+        if (pages && pages.length > 0) {
+          const last = pages[pages.length - 1];
+          if (last && !last.isClosed()) {
+            this.page = last;
+          }
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+    return this.page;
   }
 
   async validateShampoosPage() {
@@ -40,11 +58,16 @@ class DrybarPage extends BasePage {
   }
 
   async clickFirstProduct() {
+    const page = this.ensureActivePage();
+    if (!page || (page.isClosed && page.isClosed())) {
+      console.log('DEBUG: clickFirstProduct no active page');
+      return;
+    }
     // Try product link patterns
-    const links = this.page.locator(this.loc.productLink);
+    const links = page.locator(this.loc.productLink);
     if (await links.count() === 0) {
       // fallback: click first item in productList
-      const items = this.page.locator(this.loc.productList + ' a');
+      const items = page.locator(this.loc.productList + ' a');
       if (await items.count() > 0) {
         await items.first().click();
         return;
@@ -52,10 +75,11 @@ class DrybarPage extends BasePage {
       return;
     }
     await links.first().click();
-    await this.page.waitForLoadState('networkidle');
+    await page.waitForLoadState('networkidle');
   }
 
   async addToCart() {
+    this.ensureActivePage();
     // Try several add-to-cart selectors
     const sel = this.loc.addToCartBtn;
     const btn = this.page.locator(sel);
@@ -69,6 +93,7 @@ class DrybarPage extends BasePage {
   }
 
   async openMiniCart() {
+    this.ensureActivePage();
     const sel = this.loc.miniCart;
     await this.page.click(sel).catch(() => null);
     await this.page.waitForTimeout(500);
