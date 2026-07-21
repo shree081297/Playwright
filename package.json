@@ -12,8 +12,12 @@
     "agent:run": "node agents/run-tests.js",
     "agent:single": "node agents/run-single.js",
     "agent:headed": "node agents/run-tests.js --headed",
+    "agent:install-browsers": "node agents/install-browsers.js",
     "agent:open-report": "node agents/open-report.js",
     "agent:record-video": "node agents/record-video.js",
+    "agent:planner": "node agents/planner.js",
+    "agent:generator": "node agents/generator.js",
+    "agent:healer": "node agents/healer.js",
     "lint": "eslint . --ext .js,.mjs",
     "format": "prettier --write ."
   },
