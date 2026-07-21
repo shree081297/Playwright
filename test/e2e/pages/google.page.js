@@ -1,12 +1,13 @@
 const BasePage = require('./base.page');
+const locators = require('../locators/google.locators');
 
 class GooglePage extends BasePage {
   constructor(page) {
     super(page);
-    this.url = 'https://www.google.com';
-    this.searchBox = 'textarea[name="q"]';
-    this.searchButton = 'button[aria-label="Google Search"]';
-    this.firstResult = 'a[href*="http"][href*="www"]';
+    this.url = locators.url;
+    this.searchBox = locators.searchBox;
+    this.searchButton = locators.searchButton;
+    this.firstResult = locators.firstResult;
   }
 
   async goto() {
@@ -21,7 +22,7 @@ class GooglePage extends BasePage {
 
   async clickFirstResult() {
     await this.page.waitForSelector('div[data-sokoban-container]', { timeout: 5000 }).catch(() => null);
-    const resultLinks = await this.page.locator('a[jsname="UWckNb"]').all();
+    const resultLinks = await this.page.locator(locators.resultLink).all();
     if (resultLinks.length > 0) {
       await resultLinks[0].click();
     } else {

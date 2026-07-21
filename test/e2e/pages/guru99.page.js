@@ -1,14 +1,15 @@
 const BasePage = require('./base.page');
+const locators = require('../locators/guru99.locators');
 
 class Guru99Page extends BasePage {
   constructor(page) {
     super(page);
-    this.url = 'https://demo.guru99.com/';
-    this.emailInput = 'input[name="email"]';
-    this.passwordInput = 'input[name="password"]';
-    this.loginButton = 'button[type="submit"]';
-    this.homeHeader = 'h1';
-    this.userDropdown = 'a[href*="logout"]';
+    this.url = locators.url;
+    this.emailInput = locators.emailInput;
+    this.passwordInput = locators.passwordInput;
+    this.loginButton = locators.loginButton;
+    this.homeHeader = locators.homeHeader;
+    this.userDropdown = locators.userDropdown;
   }
 
   async goto() {

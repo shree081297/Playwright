@@ -1,10 +1,11 @@
 const BasePage = require('./base.page');
+const locators = require('../locators/example.locators');
 
 class ExamplePage extends BasePage {
   constructor(page) {
     super(page);
-    this.url = 'https://example.com';
-    this.heading = 'h1';
+    this.url = locators.url;
+    this.heading = locators.heading;
   }
 
   async goto() {

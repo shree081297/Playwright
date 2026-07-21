@@ -1,21 +1,23 @@
 const BasePage = require('./base.page');
+const locators = require('../locators/saucedemo.locators');
 
 class SauceDemoPage extends BasePage {
   constructor(page) {
     super(page);
-    this.url = 'https://www.saucedemo.com/v1/index.html';
-    this.username = '#user-name';
-    this.password = '#password';
-    this.loginButton = '#login-button';
-    this.errorSelector = '[data-test="error"]';
-    this.cartLink = '.shopping_cart_link';
-    this.checkoutButton = '[data-test="checkout"]';
-    this.firstName = '[data-test="firstName"]';
-    this.lastName = '[data-test="lastName"]';
-    this.postalCode = '[data-test="postalCode"]';
-    this.continueButton = '[data-test="continue"]';
-    this.finishButton = '[data-test="finish"]';
-    this.completeHeader = '.complete-header';
+    this.url = locators.url;
+    this.username = locators.username;
+    this.password = locators.password;
+    this.loginButton = locators.loginButton;
+    this.errorSelector = locators.errorSelector;
+    this.cartLink = locators.cartLink;
+    this.checkoutButton = locators.checkoutButton;
+    this.firstName = locators.firstName;
+    this.lastName = locators.lastName;
+    this.postalCode = locators.postalCode;
+    this.continueButton = locators.continueButton;
+    this.finishButton = locators.finishButton;
+    this.completeHeader = locators.completeHeader;
+    this.addBackpackSelector = locators.addBackpack;
   }
 
   async goto() {
@@ -42,8 +44,8 @@ class SauceDemoPage extends BasePage {
 
   async addBackpackToCart() {
     // Known add-to-cart id for the Backpack
-    await this.page.waitForSelector('[data-test="add-to-cart-sauce-labs-backpack"]', { timeout: 10000 });
-    await this.page.click('[data-test="add-to-cart-sauce-labs-backpack"]');
+    await this.page.waitForSelector(this.addBackpackSelector, { timeout: 10000 });
+    await this.page.click(this.addBackpackSelector);
   }
 
   async openCart() {

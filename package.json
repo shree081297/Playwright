@@ -9,6 +9,11 @@
     "test:report": "playwright test && npm run show-report",
     "install-browsers": "npx playwright install",
     "show-report": "playwright show-report",
+    "agent:run": "node agents/run-tests.js",
+    "agent:single": "node agents/run-single.js",
+    "agent:headed": "node agents/run-tests.js --headed",
+    "agent:open-report": "node agents/open-report.js",
+    "agent:record-video": "node agents/record-video.js",
     "lint": "eslint . --ext .js,.mjs",
     "format": "prettier --write ."
   },

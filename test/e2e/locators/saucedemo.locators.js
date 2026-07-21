@@ -1,0 +1,16 @@
+module.exports = {
+  url: 'https://www.saucedemo.com/v1/index.html',
+  username: '#user-name',
+  password: '#password',
+  loginButton: '#login-button',
+  errorSelector: '[data-test="error"]',
+  cartLink: '.shopping_cart_link',
+  checkoutButton: '[data-test="checkout"]',
+  firstName: '[data-test="firstName"]',
+  lastName: '[data-test="lastName"]',
+  postalCode: '[data-test="postalCode"]',
+  continueButton: '[data-test="continue"]',
+  finishButton: '[data-test="finish"]',
+  completeHeader: '.complete-header',
+  addBackpack: '[data-test="add-to-cart-sauce-labs-backpack"]',
+};
