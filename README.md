@@ -33,11 +33,12 @@ cd Playwright
 
 ```
 playwright/
-├── tests/
-│   ├── fixtures/          # Custom test fixtures
-│   ├── pages/             # Page Object Models
-│   ├── specs/             # Test specifications
-│   └── utils/             # Helper utilities
+├── test/
+│   └── e2e/
+│       ├── fixtures/      # Custom test fixtures
+│       ├── pages/         # Page Object Models
+│       ├── spec/          # Test specifications
+│       └── utils/         # Helper utilities
 ├── playwright.config.js   # Playwright configuration
 ├── package.json           # Dependencies
 └── README.md              # This file
@@ -61,7 +62,7 @@ This runs all tests with browser windows visible so you can see the interactions
 The example test case demonstrates basic Playwright functionality using Example.com:
 
 ```bash
-npx playwright test tests/specs/example.spec.js
+npx playwright test test/e2e/spec/example.spec.js
 ```
 
 **What the Example Test Does:**
@@ -72,7 +73,7 @@ npx playwright test tests/specs/example.spec.js
 
 ### Run Example Test in Headed Mode
 ```bash
-npx playwright test tests/specs/example.spec.js --headed
+npx playwright test test/e2e/spec/example.spec.js --headed
 ```
 
 ### Run Tests for Specific Browser
@@ -94,7 +95,7 @@ npx playwright test --project=webkit
 
 ### Run Specific Test File
 ```bash
-npx playwright test tests/specs/example.spec.js
+npx playwright test test/e2e/spec/example.spec.js
 ```
 
 ### Run Tests with Verbose Output
@@ -154,16 +155,16 @@ npm run show-report
 ```
 Running 1 test using 1 worker
 
-  ✓  1 [chromium] › tests/specs/example.spec.js › Example Page Tests › should display the page title (3.0s)
-  ✓  2 [chromium] › tests/specs/example.spec.js › Example Page Tests › should have visible heading (1.2s)
-  ✓  3 [chromium] › tests/specs/example.spec.js › Example Page Tests › should display correct heading text (1.2s)
+   ✓  1 [chromium] › test/e2e/spec/example.spec.js › Example Page Tests › should display the page title (3.0s)
+   ✓  2 [chromium] › test/e2e/spec/example.spec.js › Example Page Tests › should have visible heading (1.2s)
+   ✓  3 [chromium] › test/e2e/spec/example.spec.js › Example Page Tests › should display correct heading text (1.2s)
 
   3 passed (5.8s)
 ```
 
 ## Page Object Model
 
-Tests use the Page Object Model pattern to abstract page interactions. Page classes are located in `tests/pages/` and extend `BasePage` for common functionality.
+Tests use the Page Object Model pattern to abstract page interactions. Page classes are located in `test/e2e/pages/` and extend `BasePage` for common functionality.
 
 ### Example Usage
 ```javascript
@@ -229,5 +230,5 @@ cd Playwright
 
 For issues or questions:
 1. Check Playwright documentation: https://playwright.dev/
-2. Review test files in `tests/specs/`
-3. Check page objects in `tests/pages/`
+2. Review test files in `test/e2e/spec/`
+3. Check page objects in `test/e2e/pages/`

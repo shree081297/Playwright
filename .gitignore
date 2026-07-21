@@ -1,3 +1,16 @@
+.venv/
 node_modules/
+npm-debug.log*
+.DS_Store
+.env
+/.idea/
+.vscode/
+playwright-report/
+test-results/
+coverage/
+dist/
+/.nyc_output/
+*.local
+package-lock.jsonnode_modules/
 playwright-report/
 test-results/

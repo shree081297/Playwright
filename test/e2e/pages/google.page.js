@@ -6,7 +6,6 @@ class GooglePage extends BasePage {
     this.url = 'https://www.google.com';
     this.searchBox = 'textarea[name="q"]';
     this.searchButton = 'button[aria-label="Google Search"]';
-    // Updated selector for first search result link
     this.firstResult = 'a[href*="http"][href*="www"]';
   }
 
@@ -21,20 +20,14 @@ class GooglePage extends BasePage {
   }
 
   async clickFirstResult() {
-    // Wait for search results to load
     await this.page.waitForSelector('div[data-sokoban-container]', { timeout: 5000 }).catch(() => null);
-    
-    // Get all result links and click the first one
     const resultLinks = await this.page.locator('a[jsname="UWckNb"]').all();
     if (resultLinks.length > 0) {
       await resultLinks[0].click();
     } else {
-      // Fallback: click first link in search results
       const firstLink = this.page.locator('a[href*="http"][href*="www"]').first();
       await firstLink.click();
     }
-    
-    // Wait for navigation to complete
     await this.page.waitForLoadState('networkidle').catch(() => null);
   }
 
